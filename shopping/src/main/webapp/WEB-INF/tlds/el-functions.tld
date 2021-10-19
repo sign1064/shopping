@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+                        web-jsptaglibrary_2_0.xsd" 
+    version="2.0"> 
+     
+     
+     
+    <description>EL에서 함수실행</description> 
+    <tlib-version>1.0</tlib-version> 
+    <uri>/ELFunctions</uri> <!-- jsp에서 import할 때 경로 대신 부를 uri -->
+     
+     
+    <function>  
+        <description>new 이미지 출력</description> 
+        <name>newImg</name>  <!-- jsp body 안에서 부를 이름(실제 메소드 이름과 동일하게) -->
+        <function-class>                   
+            com.study.utility.Utility  <!-- 메소드의 경로 -->
+        </function-class> 
+        <function-signature>    
+            boolean compareDay( java.lang.String )  <!-- 메소드의 형태(리턴 형태, 이름, 경로를 포함한 매개변수)-->
+        </function-signature> 
+    </function> 
+    
+    
+    <function>  
+        <description>직업명 출력</description> 
+        <name>jobname</name>  <!-- jsp body 안에서 부를 이름(실제 메소드 이름과 동일하게) -->
+        <function-class>                   
+            com.study.utility.Utility  <!-- 메소드의 경로 -->
+        </function-class> 
+        <function-signature>    
+            java.lang.String getCodeValue( java.lang.String )  <!-- 메소드의 형태(리턴 형태, 이름, 경로를 포함한 매개변수)-->
+        </function-signature> 
+    </function> 
+    
+    
+    
+    <function>  
+        <description>댓글 개수</description> 
+        <name>rcount</name>
+        <function-class>
+            com.study.utility.Utility
+        </function-class> 
+        <function-signature>
+            int rcount(int, com.study.model.ReplyMapper) 
+        </function-signature> 
+    </function> 
+    
+    
+     
+</taglib> 
