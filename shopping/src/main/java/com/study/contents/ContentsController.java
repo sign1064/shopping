@@ -30,10 +30,11 @@ public class ContentsController {
 	@Qualifier("com.study.contents.ContentsServiceImpl")
 	private ContentsService service;
 	
+	
 	@GetMapping("/contents/detail/{contentsno}")
 	public String detail(@PathVariable("contentsno") int contentsno, Model model) {
 	    
-	   model.addAttribute("dto",service.detail(contentsno));
+	   model.addAttribute("dto", service.detail(contentsno));
 	  
 	    return "/contents/detail";
 	}

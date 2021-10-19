@@ -14,6 +14,7 @@ public class TilesConfiguration {
       //해당 경로에 tiles.xml 파일을 넣음   //xml 안에 레이아웃 설정
       configurer.setDefinitions(new String[]{"classpath:/tiles/tiles_member.xml",
     		  								 "classpath:/tiles/tiles_notice.xml",
+    		  								 "classpath:/tiles/tiles_order.xml",
               								 "classpath:/tiles/tiles_contents.xml"}); // tiles의 경로 --> tiles를 찾는다
       configurer.setCheckRefresh(true);
       return configurer;

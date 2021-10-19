@@ -361,9 +361,4 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
-	
-	
 }
