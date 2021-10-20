@@ -3,6 +3,8 @@ package com.study.member;
 import java.util.List;
 import java.util.Map;
 
+import com.study.orders.OrdersDTO;
+
 public interface MemberMapper {
 
 	int duplicatedId(String id);
@@ -26,4 +28,8 @@ public interface MemberMapper {
 	List<MemberDTO> list(Map map);
 	
 	MemberDTO mypage(String id);
+
+	int ototal(Map map);
+
+	List<OrdersDTO> olist(Map map);
 }

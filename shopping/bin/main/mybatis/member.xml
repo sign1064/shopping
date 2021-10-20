@@ -37,8 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<select id="total" parameterType="Map" resultType="int">
-                select count(*) from member
+	
+	 <select id="ototal" parameterType="Map" resultType="int">
+                        select count(*) from member
          <where>
                 <choose>
                         <when test="col=='mname'">
@@ -52,6 +53,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         </when>
                 </choose>
           </where>
+    </select> 
+    
+    
+	
+	
+	<select id="total" parameterType="Map" resultType="int">
+                select count(*) from orders
     </select>
 	
 	

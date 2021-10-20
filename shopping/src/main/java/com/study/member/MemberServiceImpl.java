@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.study.orders.OrdersDTO;
+
 //Service 인터페이스 구현 클래스
 
 @Service("com.study.member.MemberServiceImpl")  //ComponentScan에 의해서 지정한 이름(패키지포함)의 객체가 생성됨
@@ -78,5 +80,17 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO mypage(String id) {
 		// TODO Auto-generated method stub
 		return mapper.mypage(id);
+	}
+
+	@Override
+	public int ototal(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.ototal(map);
+	}
+
+	@Override
+	public List<OrdersDTO> olist(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.olist(map);
 	}
 }
