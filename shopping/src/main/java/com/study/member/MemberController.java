@@ -353,47 +353,5 @@ public class MemberController {
 	   return "/member/mypage";
 	  }
 	}
-	
-	
-	@RequestMapping("/member/cart")
-	public String cart(HttpServletRequest request) {
-		
-		String word = Utility.checkNull(request.getParameter("word"));
-		
-		int nowPage = 1;
-        if (request.getParameter("nowPage") != null) {
-                nowPage = Integer.parseInt(request.getParameter("nowPage"));
-        		}
-        int recordPerPage = 3;
 
-        int sno = ((nowPage - 1) * recordPerPage) + 1;
-        int eno = nowPage * recordPerPage;
-
-        Map map = new HashMap();
-        map.put("word", word);
-        map.put("sno", sno);
-        map.put("eno", eno);
-
-        int total = service.ototal(map);
-
-        List<OrdersDTO> list = service.olist(map);
-
-        String paging = Utility.paging(total, nowPage, recordPerPage, word);
-
-        request.setAttribute("list", list);
-        request.setAttribute("nowPage", nowPage);
-        request.setAttribute("word", word);
-        request.setAttribute("paging", paging);
-        
-        return "/member/cart";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

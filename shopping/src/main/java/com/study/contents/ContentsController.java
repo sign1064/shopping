@@ -1,6 +1,7 @@
 package com.study.contents;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class ContentsController {
 	private ContentsService service;
 	
 	
+
 	@GetMapping("/contents/detail/{contentsno}")
 	public String detail(@PathVariable("contentsno") int contentsno, Model model) {
 	    

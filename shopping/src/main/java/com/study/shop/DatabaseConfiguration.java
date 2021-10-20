@@ -22,7 +22,7 @@ import com.zaxxer.hikari.HikariDataSource;
 public class DatabaseConfiguration {    //데이터베이스에 대한 설정이다~
   
 	
-	@Autowired
+  @Autowired
   private ApplicationContext applicationContext;
   
   @Bean
