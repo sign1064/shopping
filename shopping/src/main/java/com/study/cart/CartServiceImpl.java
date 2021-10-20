@@ -24,4 +24,16 @@ public class CartServiceImpl implements CartService {
 		return mapper.list(map);
 	}
 
+	@Override
+	public int delete(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.delete(map);
+	}
+
+	@Override
+	public int addCart(Map map) {
+		// TODO Auto-generated method stub
+		return mapper.addCart(map);
+	}
+
 }

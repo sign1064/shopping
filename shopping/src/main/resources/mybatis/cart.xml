@@ -21,8 +21,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[   
         where r >= #{sno} and r <= #{eno}
     	]]>
-
 	</select>
 	
+	<delete id="delete" parameterType="Map">
+		delete from cart
+		where cartno = #{cartno} and contentsno = #{contentsno}
+	</delete>
+	
+	<insert id="addCart" parameterType="Map">
+		insert into cart(cartno, id, contentsno, pname, amount, price)
+		values((select nvl(max(cartno),0)+1 from cart), #{id}, #{contentsno},
+			   #{pname}, #{amount}, #{price})
+	</insert>
 
 </mapper>

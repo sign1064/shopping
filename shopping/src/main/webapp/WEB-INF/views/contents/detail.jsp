@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,14 @@
 		url += "&col=${param.col}";
 		url += "&word=${param.word}";
 		location.href = url;
+	}
+	function addCart() {
+		request.setParameter("contentsno", ${dto.contentsno});
+		request.setParameter("pname", ${dto.pname});
+		request.setParameter("price", ${dto.price});
+		request.setParameter("amount", ${amount});
+		
+		location.href = "/cart/list";
 	}
 </script>
 
@@ -58,6 +67,19 @@
 			<button type="button" class="btn" onclick="deleteM()">삭제</button>
 			</c:when>
 			</c:choose>
+			<select name="amount" id="amount">
+		        <option value=1>1</option>
+		        <option value=2>2</option>
+		        <option value=3>3</option>
+		        <option value=4>4</option>
+		        <option value=5>5</option>
+		        <option value=6>6</option>
+		        <option value=7>7</option>
+		        <option value=8>8</option>
+		        <option value=9>9</option>
+		        <option value=10>10</option>       
+		     </select>
+			<button type="button" class="btn" onclick="addCart()">장바구니 담기</button>
 			<button type="button" class="btn" onclick="listM()">목록</button>
 		</div>
 	</div>
