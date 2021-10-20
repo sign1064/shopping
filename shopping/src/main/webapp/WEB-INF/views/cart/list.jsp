@@ -11,8 +11,8 @@
    <script type="text/javascript">
      function detail(contentsno){
        var url = "/contents/detail";
-       url += "?contentsno="+contentsno;
-       url += "&nowPage=${nowPage}";
+       url += "/"+contentsno;
+       url += "?nowPage=${nowPage}";
        location.href=url;
      }  
   </script>
