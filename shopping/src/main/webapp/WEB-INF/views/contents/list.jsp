@@ -10,11 +10,14 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
    <script type="text/javascript">
-   function detail(contentsno){
-       var url = "/contents/detail";
-       url += "/"+contentsno;
-       url += "?nowPage=${nowPage}";
+     function detail(contentsno){
+       var url = "detail";
+       url += "?contentsno="+contentsno;
+       url += "&col=${col}";
+       url += "&word=${word}";
+       url += "&nowPage=${nowPage}";
        location.href=url;
+ 
      }
      
      function fileDown(filename){

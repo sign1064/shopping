@@ -9,12 +9,6 @@
   <title>장바구니 목록</title>
   <meta charset="utf-8">
    <script type="text/javascript">
-     function detail(contentsno){
-       var url = "/contents/detail";
-       url += "/"+contentsno;
-       url += "?nowPage=${nowPage}";
-       location.href=url;
-     }
      
      function order(){
     	int[] corder = document.getElementById("corder").value;
@@ -67,7 +61,7 @@
 		<c:forEach var="dto" items="${list}"> 
 			<tr>
 				<td><input type="checkbox" id="corder" name="corder" value="${dto.cartno}"></td>
-   				<td><a href="javascript:detail('${dto.contentsno}')">${dto.pname}</a></td>
+   				<td><a href="/contents/detail/${dto.contentsno }">${dto.pname}</a></td>
     			<td>${dto.amount}</td>
 				<td>${dto.price}</td>
 				<td>${dto.total}</td>
