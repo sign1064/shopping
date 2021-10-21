@@ -9,8 +9,8 @@ public interface CartMapper {
 
 	List<CartDTO> list(Map map);
 
-	int delete(Map map);
-
 	int addCart(Map map);
+
+	int delete(int cartno);
 
 }

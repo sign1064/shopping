@@ -25,25 +25,6 @@ public class CartController {
 	private CartService service;
 	
 	
-	@RequestMapping("/cart/delete")
-	public String delete(HttpServletRequest request) {
-		int cartno = Integer.parseInt(request.getParameter("cartno"));
-		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
-		
-		Map map = new HashMap();
-		map.put("cartno", cartno);
-		map.put("contentsno", contentsno);
-		
-		int cnt = service.delete(map);
-		
-		if(cnt > 0) {
-			return "redirect:/cart/list";
-		}else {
-			return "error";
-		}
-	}
-	
-	
 	@RequestMapping("/cart/addCart")
 	public String orderFrom(HttpServletRequest request, HttpSession session) {
 		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
@@ -96,6 +77,19 @@ public class CartController {
 		} else {
 
 			return "/member/login";
+		}
+	}
+	
+	@GetMapping("/cart/delete")
+	public String deleteCart(HttpServletRequest request) {
+		int  cartno = Integer.parseInt(request.getParameter("cartno"));
+		
+		int cnt = service.delete(cartno); 
+		
+		if(cnt>0) {
+		return "redirect:/cart/list";
+		}else {
+			return "error";
 		}
 	}
 }

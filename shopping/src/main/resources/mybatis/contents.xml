@@ -29,9 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         <when test="col=='pname'">
                             pname like '%'||#{word}||'%'
                         </when>
-                        <when test="col=='price'">
-                            price like '%'||#{word}||'%'
-                        </when>
                     </choose>
                      and cateno = #{cateno}
                 </where>

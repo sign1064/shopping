@@ -17,10 +17,17 @@
      }
      
      function order(){
-		var url = "/cart/orderForm";
-		url += "?cartno=${cartno}";
+    	int[] corder = document.getElementById("corder").value;
+    	for(int i=0;i<corder.length();i++){
+    		console.log(corder[i]);
+    	}
+    	
+    	//console.log("hi");
+    	
+		//var url = "/cart/orderForm";
+		//url += "?cartno=${cartno}";
 		
-    	location.href=url;
+    	//location.href=url;
      }
      
      
@@ -59,11 +66,12 @@
   
 		<c:forEach var="dto" items="${list}"> 
 			<tr>
+				<td><input type="checkbox" id="corder" name="corder" value="${dto.cartno}"></td>
    				<td><a href="javascript:detail('${dto.contentsno}')">${dto.pname}</a></td>
     			<td>${dto.amount}</td>
 				<td>${dto.price}</td>
 				<td>${dto.total}</td>
-				<td><button type="button" class="btn" onclick="location.href='/cart/delete?cartno=${dto.cartno}&contentsno=${dto.contentsno}'">삭제</button></td>
+				<td><button type="button" class="btn" onclick="location.href='/cart/delete?cartno=${dto.cartno}'">삭제</button></td>
 			</tr>
 		</c:forEach>
 	</c:otherwise>

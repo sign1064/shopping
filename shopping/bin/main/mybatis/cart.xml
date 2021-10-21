@@ -24,9 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	]]>
 	</select>
 	
-	<delete id="delete" parameterType="Map">
+	<delete id="delete" parameterType="int">
 		delete from cart
-		where cartno = #{cartno} and contentsno = #{contentsno}
+		where cartno = #{cartno}
 	</delete>
 	
 	<insert id="addCart" parameterType="Map">

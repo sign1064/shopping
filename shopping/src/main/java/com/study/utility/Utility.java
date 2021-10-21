@@ -28,7 +28,7 @@ public class Utility {
 		str.append("<ul class='pagination'> ");
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<li><a href='/contents/mainlist/" +"?nowPage=" + _nowPage + "'>이전</A></li>");
+			str.append("<li><a href='/cart/list/" +"?nowPage=" + _nowPage + "'>이전</A></li>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
@@ -39,13 +39,13 @@ public class Utility {
 			if (nowPage == i) {
 				str.append("<li class='active'><a href=#>" + i + "</a></li>");
 			} else {
-				str.append("<li><a href='/contents/mainlist/" + "?nowPage=" + i + "'>" + i + "</A></li>");
+				str.append("<li><a href='/cart/list/" + "?nowPage=" + i + "'>" + i + "</A></li>");
 			}
 		}
 
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<li><A href='/contents/mainlist/" + "?nowPage=" + _nowPage + "'>다음</A></li>");
+			str.append("<li><A href='/cart/list/" + "?nowPage=" + _nowPage + "'>다음</A></li>");
 		}
 		str.append("</ul>");
 		str.append("</div>");
@@ -55,7 +55,7 @@ public class Utility {
 	
 	
 	
-	public static String paging2(int total, int nowPage, int recordPerPage, String col, String word, int cateno) {
+	public static String paging2(int total, int nowPage, int recordPerPage, int cateno) {
 		int pagePerBlock = 5; // 블럭당 페이지 수
 		int totalPage = (int) (Math.ceil((double) total / recordPerPage)); // 전체 페이지
 		int totalGrp = (int) (Math.ceil((double) totalPage / pagePerBlock));// 전체 그룹
@@ -68,8 +68,7 @@ public class Utility {
 		str.append("<ul class='pagination'> ");
 		int _nowPage = (nowGrp - 1) * pagePerBlock; // 10개 이전 페이지로 이동
 		if (nowGrp >= 2) {
-			str.append("<li><a href='/contents/mainlist/" + cateno + "?col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>이전</A></li>");
+			str.append("<li><a href='/contents/mainlist/" + cateno + "?nowPage=" + _nowPage + "'>이전</A></li>");
 		}
 
 		for (int i = startPage; i <= endPage; i++) {
@@ -80,15 +79,13 @@ public class Utility {
 			if (nowPage == i) {
 				str.append("<li class='active'><a href=#>" + i + "</a></li>");
 			} else {
-				str.append("<li><a href='/contents/mainlist/" + cateno + "?col=" + col + "&word=" + word + "&nowPage="
-						+ i + "'>" + i + "</A></li>");
+				str.append("<li><a href='/contents/mainlist/" + cateno + "?nowPage=" + i + "'>" + i + "</A></li>");
 			}
 		}
 
 		_nowPage = (nowGrp * pagePerBlock) + 1; // 10개 다음 페이지로 이동
 		if (nowGrp < totalGrp) {
-			str.append("<li><A href='/contents/mainlist/" + cateno + "?col=" + col + "&word=" + word + "&nowPage="
-					+ _nowPage + "'>다음</A></li>");
+			str.append("<li><A href='/contents/mainlist/" + cateno + "?nowPage=" + _nowPage + "'>다음</A></li>");
 		}
 		str.append("</ul>");
 		str.append("</div>");

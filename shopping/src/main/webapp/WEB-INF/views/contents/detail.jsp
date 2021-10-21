@@ -19,13 +19,6 @@
 		location.href = url;
 	}
 
-	function listM() {
-		var url = "/contents/list";
-		url += "?nowPage=${param.nowPage}";
-		url += "&col=${param.col}";
-		url += "&word=${param.word}";
-		location.href = url;
-	}
 	function addCart() {
 		var contentsno = ${dto.contentsno};
 		var amount = document.getElementById("amount").value;
@@ -89,7 +82,7 @@
 		        <option value="10">10</option>       
 		     </select>
 			<button type="button" class="btn" onclick="addCart()">장바구니 담기</button>
-			<button type="button" class="btn" onclick="listM()">목록</button>
+			<button type="button" class="btn" onclick="history.back()">목록</button>
 		</div>
 	</div>
 </body>
