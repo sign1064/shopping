@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.study.contents.ContentsDTO;
 import com.study.utility.Utility;
 
 @Controller
@@ -43,26 +44,19 @@ public class CartController {
 	}
 	
 	
-	@GetMapping("/cart/addCart")
+	@RequestMapping("/cart/addCart")
 	public String orderFrom(HttpServletRequest request, HttpSession session) {
-		
-		String id = session.getId();
 		int contentsno = Integer.parseInt(request.getParameter("contentsno"));
-		String pname = request.getParameter("pname");
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		int price = Integer.parseInt(request.getParameter("price"));
-		
+		String id = (String) session.getAttribute("id");
 		
 		Map map = new HashMap();
 		
 		map.put("id", id);
 		map.put("contentsno", contentsno);
-		map.put("pname", pname);
 		map.put("amount", amount);
-		map.put("price", price);
 		
 		int cnt = service.addCart(map);
-		
 		
 		return "redirect:/cart/list";
 	}

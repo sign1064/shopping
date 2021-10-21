@@ -15,9 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="list" parameterType="Map" resultType="com.study.cart.CartDTO">
 		select cartno, id, contentsno, pname, amount, price, total, r
-		from (select cartno, id, contentsno, pname, amount, price, (price*amount) as total, rownum r 
-			  from cart
-			  where id=#{id})
+		from (select c.cartno, m.id, ct.contentsno, ct.pname, c.amount, ct.price, (ct.price*c.amount) as total, rownum r
+			  from member m, contents ct, cart c
+			  where m.id = c.id and c.contentsno = ct.contentsno
+			  and m.id = #{id})
 		<![CDATA[   
         where r >= #{sno} and r <= #{eno}
     	]]>
@@ -29,9 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<insert id="addCart" parameterType="Map">
-		insert into cart(cartno, id, contentsno, pname, amount, price)
-		values((select nvl(max(cartno),0)+1 from cart), #{id}, #{contentsno},
-			   #{pname}, #{amount}, #{price})
+		insert into cart(cartno, id, contentsno, amount)
+		values((select nvl(max(cartno),0)+1 from cart), #{id}, #{contentsno}, #{amount})
 	</insert>
 
 </mapper>
