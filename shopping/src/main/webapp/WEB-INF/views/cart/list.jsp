@@ -8,12 +8,14 @@
 <head>
   <title>장바구니 목록</title>
   <meta charset="utf-8">
+ 
    <script type="text/javascript">
      
      function order(){
-    	int[] corder = document.getElementById("corder").value;
-    	for(int i=0;i<corder.length();i++){
-    		console.log(corder[i]);
+    	var corder = document.getElementById("corder");
+    	
+    	for(i=0; i<corder.length; i++){
+    		console.log("hi");
     	}
     	
     	//console.log("hi");
@@ -25,6 +27,8 @@
      }
      
      
+     
+     
   </script>
  
 </head>
@@ -32,6 +36,7 @@
 <div class="container">
  
    <h2>장바구니 목록</h2>
+   <form method="post" action="/cart/orderForm">
 	<c:choose>
     <c:when test="${map.count == 0 }">
         장바구니가 비었습니다.
@@ -42,7 +47,7 @@
   <table class="table table-striped">
    <thead>
     <tr>
-    	<th></th>
+    	<th style="font-size:20%"><input type="checkbox" name="allCheck" id="allCheck"> 전체 선택</th>
     	<th>상품명</th>
     	<th>수량</th>
     	<th>가격</th>
@@ -62,9 +67,9 @@
 			<tr>
 				<td><input type="checkbox" id="corder" name="corder" value="${dto.cartno}"></td>
    				<td><a href="/contents/detail/${dto.contentsno }">${dto.pname}</a></td>
-    			<td>${dto.amount}</td>
-				<td>${dto.price}</td>
-				<td>${dto.total}</td>
+    			<td>${dto.amount}개</td>
+				<td>${dto.price}원</td>
+				<td>${dto.total}원</td>
 				<td><button type="button" class="btn" onclick="location.href='/cart/delete?cartno=${dto.cartno}'">삭제</button></td>
 			</tr>
 		</c:forEach>
@@ -73,12 +78,14 @@
  
    </tbody>
   </table>
-  <div><button type="button" class="btn" onclick="order()">주문</button></div>
+  <div align="right"></div>
+  <div><button>주문</button></div>
   <div>
       ${paging}
   </div>
   </c:otherwise>
   </c:choose>
+  </form>
 </div>
 </body> 
 </html> 

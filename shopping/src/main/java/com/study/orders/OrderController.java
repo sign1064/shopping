@@ -1,8 +1,10 @@
 package com.study.orders;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 public class OrderController {
 	
@@ -10,8 +12,10 @@ public class OrderController {
 	@Qualifier("com.study.order.OrderServiceImpl")
 	private OrderService service;
 	
-	@GetMapping("/order")
-	public String order() {
-		return "/order";
+	@PostMapping("/cart/orderForm")
+	public String orderForm(HttpServletRequest request, OrdersDTO dto) {
+		
+		
+		return "/order/orderForm";
 	}
 }

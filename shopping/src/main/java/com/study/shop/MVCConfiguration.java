@@ -11,8 +11,8 @@ public class MVCConfiguration implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
  
-// URL에 "/admin/"이 들어간 요청은 AdminInterceptor 작동함.
     registry.addInterceptor(new AdminInterceptor()).addPathPatterns("/admin/**");
  
   }
 }
+

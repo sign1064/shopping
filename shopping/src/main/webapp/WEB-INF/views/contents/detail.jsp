@@ -23,19 +23,14 @@
 		var contentsno = ${dto.contentsno};
 		var amount = document.getElementById("amount").value;
 		
-		//alert(contentsno+" "+amount);
-		
 		var url = "/cart/addCart?contentsno=";
 		url += contentsno;
 		url += "&amount=";
 		url += amount;
-		
-		//alert(url);
-		//request.setParameter("contentsno", contentsno);
-		//request.setParameter("amount", amount);
-		
+
 		location.href = url;
 	}
+	
 </script>
 
 </head>
