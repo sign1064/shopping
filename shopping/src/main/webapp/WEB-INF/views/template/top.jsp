@@ -76,7 +76,7 @@
           <li><a href="${root}/member/mypage">Mypage</a></li>
           <li><a href="${root}/review/list">Review</a></li>
           <li><a href="${root}/notice/list">Notice</a></li>
-          <li><a href="#">Q&A</a></li>
+          <li><a href="${root}/QA/Chatting">Q&A</a></li>
         </ul>
       </li>
     <li><a id="grade"><span class="glyphicon glyphicon-grain"></span> ${str}</a></li>
