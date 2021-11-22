@@ -31,7 +31,6 @@ public class ChatCont {
 		return "naver_chatting";
 	}
 
-	// ��ũ�� Ű
 	private static String secretKey = "eUFSb3ZORGlqWVJ1bUdyU0RDdWxoTFpJdXhrclBSWWY=";
 	private static String apiUrl = "https://2164d1132d6b497da2b1cbc13a9c7c0b.apigw.ntruss.com/custom/v1/5679/e3b9ba55facff1a5eb6828b3d7d1df8f4495489c29e168bfc20cdd80616a28d7";
 
@@ -67,7 +66,7 @@ public class ChatCont {
 
 		BufferedReader br;
 
-		if (responseCode == 200) { 
+		if (responseCode == 200) {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
 			String decodedString;
@@ -91,7 +90,7 @@ public class ChatCont {
 			}
 
 			in.close();
-		} else { 
+		} else {
 			chatMessage = con.getResponseMessage();
 		}
 		return chatMessage;
