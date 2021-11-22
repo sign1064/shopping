@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,8 @@
 				<div class="row">
 					<h2>상품 준비중 입니다.</h2>
 					<p>
-						<img src="/pstorage/default.jpg" class="img-thumbnail" width="236"
-							height="306">
+						<img src="${root }/pstorage/default.jpg" class="img-thumbnail"
+							width="236" height="306">
 					</p>
 
 				</div>
@@ -27,11 +28,12 @@
 					<c:forEach var="dto" begin="0" end="3" items="${list}">
 						<div class="col-sm-3">
 							<a href="/contents/detail/${dto.contentsno }">
-							<p><img src="/pstorage/${dto.filename }" class="img-thumbnail"
-									width="236" height="306">
-							</p></a>
-							<p>${dto.pname }<br>
-								<b>${dto.price }</b>
+								<p>
+									<img src="${root }/pstorage/${dto.filename }"
+										class="img-thumbnail" width="236" height="306">
+								</p>
+							</a>
+							<p>${dto.pname }<br> <b>${dto.price }</b>
 							</p>
 						</div>
 					</c:forEach>
@@ -40,11 +42,12 @@
 					<c:forEach var="dto" begin="4" end="7" items="${list}">
 						<div class="col-sm-3">
 							<a href="/contents/detail/${dto.contentsno }">
-							<p><img src="/pstorage/${dto.filename }" class="img-thumbnail"
-									width="236" height="306">
-							</p></a>
-							<p>${dto.pname }<br>
-								<b>${dto.price }</b>
+								<p>
+									<img src="${root }/pstorage/${dto.filename }"
+										class="img-thumbnail" width="236" height="306">
+								</p>
+							</a>
+							<p>${dto.pname }<br> <b>${dto.price }</b>
 							</p>
 						</div>
 					</c:forEach>

@@ -53,8 +53,8 @@ COMMENT ON COLUMN contents.rdate is '등록일';
 COMMENT ON COLUMN contents.stock is '재고량';
 
 insert into contents(contentsno, cateno, pname, price, filename, detail, rdate, stock)
-values((select nvl(max(contentsno),0)+1 from contents), 1, 'Ripped Skinny Jeans', 
-50000, 'jean.jpg','찢어진 스키니 청바지 입니다.',sysdate,10);
+values((select nvl(max(contentsno),0)+1 from contents), 1, 'Ripped Skinny Jeans1', 
+40000, 'jeans1.jpg','찢어진 스키니 청바지1입니다.',sysdate,10);
  
 select contentsno, cateno, pname, price, filename, detail, stock 
 from contents 
@@ -79,3 +79,7 @@ from (
         order by contentsno desc
     )
 )where r >= 1 and r <= 12;
+
+alter table notice rename column NCONTENTS to CONTENT;
+
+ALTER TABLE notice ADD COLUMN passwd varchar(4) NOT NULL;

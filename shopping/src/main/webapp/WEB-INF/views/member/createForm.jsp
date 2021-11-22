@@ -222,10 +222,10 @@ function inCheck(f){
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="sample6_postcode">우편번호</label>
-      <div class="col-sm-1">          
-        <input type="text" class="form-control" 
-         name="zipcode" id="sample6_postcode" placeholder="우편번호">
-      </div>
+      <div class="col-sm-1">
+					<input type="text" class="form-control" name="postcode"
+						id="sample6_postcode" placeholder="우편번호">
+				</div>
       
       <button type="button" class="btn btn-default col-sm-2"
       onclick="sample6_execDaumPostcode()">주소검색</button>
@@ -241,27 +241,7 @@ function inCheck(f){
       </div>
     </div>
     
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="job"><span id="need">*</span>직업</label>
-    <div class="col-sm-2">
-    	<select name="job" class="form-control">
-    		<option value="0">선택하세요</option>
-			<option value="A01">회사원</option>
-			<option value="A02">전산관련직</option>
-			<option value="A03">연구전문직</option>
-			<option value="A04">각종학교학생</option>
-			<option value="A05">일반자영업</option>
-			<option value="A06">공무원</option>
-			<option value="A07">의료인</option>
-			<option value="A08">법조인</option>
-			<option value="A09">종교/언론/예술인</option>
-			<option value="A10">기타</option>
-    	
-    	</select>
-    
-    </div>
-    </div>
-       
+
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-5">
         <button type="submit" class="btn btn-default">등록</button>

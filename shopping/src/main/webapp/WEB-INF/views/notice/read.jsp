@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>조회</title>
+<title>공지사항 조회</title>
 <meta charset="utf-8">
 
 <script type="text/javascript">
@@ -31,7 +31,7 @@
 <body>
 	<div class="container">
 
-		<h2>조회</h2>
+		<h2>공지사항 조회</h2>
 		<div class="panel panel-default">
 			<div class="panel-heading">작성자</div>
 			<div class="panel-body">${dto.wname}</div>
@@ -51,11 +51,13 @@
 		</div>
 		<div>
 			<c:choose>
-    		<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
-			<button type="button" class="btn" onclick="location.href='/admin/notice/create'">등록</button>
-			<button type="button" class="btn" onclick="updateM()">수정</button>
-			<button type="button" class="btn" onclick="deleteM()">삭제</button>
-			</c:when>
+				<c:when
+					test="${not empty sessionScope.id && sessionScope.grade == 'A '}">
+					<button type="button" class="btn"
+						onclick="location.href='/admin/notice/create'">등록</button>
+					<button type="button" class="btn" onclick="updateM()">수정</button>
+					<button type="button" class="btn" onclick="deleteM()">삭제</button>
+				</c:when>
 			</c:choose>
 			<button type="button" class="btn" onclick="listM()">목록</button>
 		</div>

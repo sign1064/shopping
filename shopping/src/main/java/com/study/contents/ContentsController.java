@@ -30,32 +30,28 @@ public class ContentsController {
 	@Autowired
 	@Qualifier("com.study.contents.ContentsServiceImpl")
 	private ContentsService service;
-	
-	
 
 	@GetMapping("/contents/detail/{contentsno}")
 	public String detail(@PathVariable("contentsno") int contentsno, Model model) {
-	    
-	   model.addAttribute("dto", service.detail(contentsno));
-	  
-	    return "/contents/detail";
+
+		model.addAttribute("dto", service.detail(contentsno));
+
+		return "/contents/detail";
 	}
 
 	@PostMapping("/contents/updateFile")
-	public String updateFile(MultipartFile filenameMF, String oldfile, int contentsno, HttpServletRequest request)
-			throws IOException {
-		String basePath = new ClassPathResource("/static/pstorage").getFile().getAbsolutePath();
+	public String updateFile(MultipartFile filenameMF, String oldfile, int contentsno, HttpServletRequest request) {
+
+		String basePath = Contents.getUploadDir();
 
 		if (oldfile != null && !oldfile.equals("default.jpg")) { // 원본파일 삭제
 			Utility.deleteFile(basePath, oldfile);
 		}
 
-		// pstorage에 변경 파일 저장
 		Map map = new HashMap();
 		map.put("contentsno", contentsno);
 		map.put("fname", Utility.saveFileSpring(filenameMF, basePath));
 
-		// 디비에 파일명 변경
 		int cnt = service.updateFile(map);
 
 		if (cnt == 1) {
@@ -76,7 +72,6 @@ public class ContentsController {
 
 	@RequestMapping("/contents/list")
 	public String list(HttpServletRequest request) {
-		// 검색관련------------------------
 		String col = Utility.checkNull(request.getParameter("col"));
 		String word = Utility.checkNull(request.getParameter("word"));
 
@@ -84,14 +79,11 @@ public class ContentsController {
 			word = "";
 		}
 
-		// 페이지관련-----------------------
-		int nowPage = 1;// 현재 보고있는 페이지
 		if (request.getParameter("nowPage") != null) {
 			nowPage = Integer.parseInt(request.getParameter("nowPage"));
 		}
-		int recordPerPage = 5;// 한페이지당 보여줄 레코드갯수
+		int recordPerPage = 5;
 
-		// DB에서 가져올 순번-----------------
 		int sno = ((nowPage - 1) * recordPerPage) + 1;
 		int eno = nowPage * recordPerPage;
 
@@ -107,7 +99,6 @@ public class ContentsController {
 
 		String paging = Utility.paging(total, nowPage, recordPerPage, col, word);
 
-		// request에 Model사용 결과 담는다
 		request.setAttribute("list", list);
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("col", col);
@@ -140,9 +131,19 @@ public class ContentsController {
 
 	}
 
+	@GetMapping("/contents/delete/{contentsno}")
+	public String delete(@PathVariable("contentsno") int contentsno, Model model) {
+
+		service.delete(contentsno);
+
+		return "redirect:/contents/list";
+
+	}
+
 	@PostMapping("/contents/create")
-	public String create(ContentsDTO dto, HttpServletRequest request) throws IOException {
-		String upDir = new ClassPathResource("/static/pstorage").getFile().getAbsolutePath();
+	public String create(ContentsDTO dto, HttpServletRequest request) {
+
+		String upDir = Contents.getUploadDir();
 
 		String fname = Utility.saveFileSpring(dto.getFilenameMF(), upDir);
 		int size = (int) dto.getFilenameMF().getSize();
@@ -175,7 +176,7 @@ public class ContentsController {
 
 	@GetMapping("/contents/mainlist/{cateno}")
 	public String mainlist(@PathVariable("cateno") int cateno, HttpServletRequest request, Model model) {
-		
+
 		int nowPage = 1;
 		if (request.getParameter("nowPage") != null) {
 			nowPage = Integer.parseInt(request.getParameter("nowPage"));

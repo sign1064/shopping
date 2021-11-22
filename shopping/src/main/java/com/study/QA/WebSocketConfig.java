@@ -1,6 +1,7 @@
 package com.study.QA;
 
 import org.springframework.context.annotation.Configuration;
+
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -12,12 +13,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").withSockJS(); // À¥ ¼ÒÄÏÀ» »ç¿ëÇÏ±â À§ÇØ ¼³Á¤ÇÏ´Â ºÎºÐ
+        registry.addEndpoint("/ws").withSockJS(); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/app"); //prefix ¼³Á¤
-        registry.enableSimpleBroker("/topic"); //topic ÀÌ¶ó´Â ÁÖÁ¦¿¡ ºê·ÎÄ¿¸¦ ¼³Á¤
+        registry.setApplicationDestinationPrefixes("/app"); //prefix ï¿½ï¿½ï¿½ï¿½
+        registry.enableSimpleBroker("/topic"); //topic ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 }

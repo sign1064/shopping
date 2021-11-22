@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.cart.CartMapper">
+
+
+	<select id="total" parameterType="String" resultType="int">
+		select count(*) from cart
+		where id = #{id}
+	</select>
+	
+	
+	<select id="list" parameterType="Map" resultType="com.study.cart.CartDTO">
+		select cartno, id, contentsno, pname, amount, price, total, r
+		from (select c.cartno, m.id, ct.contentsno, ct.pname, c.amount, ct.price, (ct.price*c.amount) as total, rownum r
+			  from member m, contents ct, cart c
+			  where m.id = c.id and c.contentsno = ct.contentsno
+			  and m.id = #{id})
+		<![CDATA[   
+        where r >= #{sno} and r <= #{eno}
+    	]]>
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from cart
+		where cartno = #{cartno}
+	</delete>
+	
+	<insert id="addCart" parameterType="Map">
+		insert into cart(cartno, id, contentsno, amount)
+		values((select nvl(max(cartno),0)+1 from cart), #{id}, #{contentsno}, #{amount})
+	</insert>
+
+</mapper>

@@ -1,11 +1,16 @@
 package com.study.member;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,33 +21,40 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.study.orders.OrdersDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.contents.Contents;
 import com.study.utility.Utility;
 
 @Controller
 public class MemberController {
-
+	
 	@Autowired
 	@Qualifier("com.study.member.MemberServiceImpl") //이 타입(서비스 인터페이스를 구현한 클래스)의 객체를 서비스 인터페이스에 주입하겠다
 	private MemberService service; //컨트롤러는 서비스 인터페이스를 사용하기 때문에 연결하기 위해(@Autowired로 미리 생성된 서비스를 가져옴)
-	
-	
 	
 	@GetMapping("/")
 	public String home() {
 
 		return "/home";  //tiles(jsp) 
 	}
-	
 	
 	@GetMapping("/member/agree")
 	public String agree() {
@@ -58,7 +70,9 @@ public class MemberController {
 	@PostMapping("/member/create")
 	public String create(MemberDTO dto) throws IOException {
 		
-		String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+		//String upDir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+		
+		String upDir = Contents.getUploadDir();
 		
 		String fname = Utility.saveFileSpring(dto.getFnameMF(), upDir);
 		
@@ -149,7 +163,6 @@ public class MemberController {
             			Model model) { 
 		
 		 int cnt = service.loginCheck(map);  //id, 비번으로 로그인 확인
-         
          if(cnt > 0) {//회원이다
                  String grade = service.getGrade(map.get("id"));
                  session.setAttribute("id", map.get("id"));
@@ -184,12 +197,78 @@ public class MemberController {
      }
 	}
 	
+//	@PostMapping("/member/logout/kakao/callback")
+//	public String logoutKakaoCallback() {
+//		return "/member/logout";
+//	}
 	
-	
-	@GetMapping("/member/logout")
+	@RequestMapping("/member/logout")
     public String logout(HttpSession session) {
-            //session.removeAttribute("id");
-            //session.removeAttribute("grade");
+		
+			String grade = (String) session.getAttribute("grade");
+			String token = (String) session.getAttribute("token");
+			
+			System.out.println(grade);
+			System.out.println(token);
+			
+			if(grade == "KH") {
+				System.out.println("로그아웃 준비");
+				String reqURL ="https://kapi.kakao.com/v1/user/unlink";
+		        try {
+		            URL url = new URL(reqURL);
+		    		
+		            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		            conn.setRequestMethod("POST");
+		    		conn.setRequestProperty("Authorization","Bearer " + token);
+		            
+		            int responseCode = conn.getResponseCode();
+		            System.out.println("responseCode : " + responseCode);
+		 
+		            if(responseCode ==400)
+		                throw new RuntimeException("카카오 로그아웃 도중 오류 발생");
+		            
+		            
+		            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		            
+		            String br_line = "";
+		            String result = "";
+		            while ((br_line = br.readLine()) != null) {
+		                result += br_line;
+		            }
+		            System.out.println("결과"+result);
+		        }catch(IOException e) {
+		            
+		        }
+				
+				
+//		        try {
+//		        	String reqURL ="https://kauth.kakao.com/oauth/logout?client_id=50749d73349bbd242c92152b3bde6677&logout_redirect_uri=http://localhost8000";
+//		            URL url = new URL(reqURL);
+//		    		
+//		            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//		            conn.setRequestMethod("GET");
+//		    		conn.setRequestProperty("Authorization","Bearer " + token);
+//		            
+//		            int responseCode = conn.getResponseCode();
+//		            System.out.println("responseCode : " + responseCode);
+//		 
+//		            if(responseCode ==400)
+//		                throw new RuntimeException("카카오 로그아웃 도중 오류 발생");
+//		            
+//		            
+//		            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//		            
+//		            String br_line = "";
+//		            String result = "";
+//		            while ((br_line = br.readLine()) != null) {
+//		                result += br_line;
+//		            }
+//		            System.out.println("결과"+result);
+//		        }catch(IOException e) {
+//		            
+//		        }
+
+			}
             session.invalidate();  //세션 삭제
             
             return "redirect:/";
@@ -276,7 +355,8 @@ public class MemberController {
                     HttpServletResponse response) throws IOException {
 
             // 절대경로
-            String dir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+            //String dir = new ClassPathResource("/static/member/storage").getFile().getAbsolutePath();
+			String dir = Member.getUploadDir();
             String filename = request.getParameter("filename");
             byte[] files = FileUtils.readFileToByteArray(new File(dir, filename));
             response.setHeader("Content-disposition",

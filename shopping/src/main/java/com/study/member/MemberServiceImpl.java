@@ -93,4 +93,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mapper.olist(map);
 	}
+
+	@Override
+	public int kakaoCreate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.kakaoCreate(dto);
+	}
+
+	@Override
+	public int googleCreate(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.googleCreate(dto);
+	}
 }

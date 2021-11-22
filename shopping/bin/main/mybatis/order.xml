@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.orders.OrderMapper">
+
+	<insert id="order" parameterType="Map">
+		insert into order(orderno,
+		cartno, id)
+		values((select nvl(max(contentsno),0)+1 from order),
+		#{cartno},#{id})
+	</insert>
+
+</mapper>

@@ -2,18 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="util" uri="/ELFunctions" %>
+<c:set var="root" value="${pageContext.request.contextPath }" />
 
- 
+
 <!DOCTYPE html> 
 <html> 
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
    <script type="text/javascript">
+   
      function detail(contentsno){
-       var url = "detail";
-       url += "?contentsno="+contentsno;
-       url += "&col=${col}";
+       var url = "/contents/detail/";
+       url += contentsno;
+       url += "?col=${col}";
        url += "&word=${word}";
        url += "&nowPage=${nowPage}";
        location.href=url;
@@ -67,7 +69,7 @@
     <th>가격</th>
     <th>등록날짜</th>
     <th>재고</th>
-    <th>수정/삭제/이미지수정</th>
+    <th>수정/삭제/사진수정</th>
     </tr>
    </thead>
    <tbody>
@@ -83,7 +85,7 @@
    <tr>
     <td>${dto.contentsno}</td>
     <td>
-    <img src="/pstorage/${dto.filename}"  class="img-rounded" width="100px" height="100px">
+    <img src="${root }/pstorage/${dto.filename}"  class="img-rounded" width="100px" height="100px">
     </td>
     <td>
     <a href="javascript:detail('${dto.contentsno}')">${dto.pname}</a>

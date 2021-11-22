@@ -10,5 +10,5 @@ public class CartDTO {
 	private String pname;
 	private int amount;
 	private int price;
-	private int total;	
+	private int total;
 }

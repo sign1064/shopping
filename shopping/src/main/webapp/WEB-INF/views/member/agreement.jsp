@@ -1,37 +1,33 @@
-<%@ page contentType="text/html; charset=UTF-8" %> 
- 
-<!DOCTYPE html> 
-<html> 
+<%@ page contentType="text/html; charset=UTF-8"%>
+
+<!DOCTYPE html>
+<html>
 <head>
-  <title>회원약관</title>
-  <meta charset="utf-8">
-  <script type="text/javascript">
-  function send(){
-    if(document.frm.agree.checked == false){ 
-      alert('회원 약관에 동의해야 회원 가입이 가능합니다.'); 
-      return false; // 서브밋 중지 
-    }
-    
-  }
-  
-  </script>
-  
+<title>회원약관</title>
+<meta charset="utf-8">
+<script type="text/javascript">
+	function send() {
+		if (document.frm.agree.checked == false) {
+			alert('회원 약관에 동의해야 회원 가입이 가능합니다.');
+			return false; // 서브밋 중지 
+		}
+
+	}
+</script>
+
 </head>
-<body> 
-<div class="container">
-<h2 class="col-sm-offset-1 col-sm-11">약관동의</h2>
-<form class="form-horizontal" 
-      action="createForm"
-      method="post"
-      onsubmit="return send()"
-      name = "frm"
-      >
- 
-  
-  <div class="form-group">
-    <label class="control-label col-sm-1" for="content"></label>
-    <div class="col-sm-8">
-    <textarea rows="20" cols="100" id="content" name="content" class="form-control">Cummunity 서비스약관 (2005. 7. 18 부터 유효) 
+<body>
+	<div class="container">
+		<h2 class="col-sm-offset-1 col-sm-11">약관동의</h2>
+		<form class="form-horizontal" action="createForm" method="post"
+			onsubmit="return send()" name="frm">
+
+
+			<div class="form-group">
+				<label class="control-label col-sm-1" for="content"></label>
+				<div class="col-sm-8">
+					<textarea rows="20" cols="100" id="content" name="content"
+						class="form-control">Cummunity 서비스약관 (2005. 7. 18 부터 유효) 
  
 제1조(목적 등) 
  
@@ -210,18 +206,19 @@
  
   
 본 약관은 2005. 7. 18. 부터 적용하고, 2004. 10. 11.부터 적용되던 종전의 약관은 본 약관으로 대체합니다. </textarea>
-    </div>
-  </div>
-  
-   <div class="form-group">
-   <div class="col-sm-offset-2 col-sm-5">
-    <input id="agree" type="checkbox" name="agree" value="1" ><label for="agree"> 약관에 동의합니다 </label>
-    
-    <button class="btn">회원가입</button>
-    <button type="button" class="btn" onclick="history.back()">취소</button>
-   </div>
- </div>
-</form>
-</div>
-</body> 
-</html> 
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-5">
+					<input id="agree" type="checkbox" name="agree" value="1"><label
+						for="agree"> 약관에 동의합니다 </label>
+
+					<button class="btn">회원가입</button>
+					<button type="button" class="btn" onclick="history.back()">취소</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

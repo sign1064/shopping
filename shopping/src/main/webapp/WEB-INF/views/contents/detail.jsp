@@ -19,10 +19,15 @@
 		location.href = url;
 	}
 
-	function addCart() {
-		var contentsno = ${dto.contentsno};
+	function 
+	addCart() {
+		var contentsno = $
+		{
+			dto.contentsno
+		}
+		;
 		var amount = document.getElementById("amount").value;
-		
+
 		var url = "/cart/addCart?contentsno=";
 		url += contentsno;
 		url += "&amount=";
@@ -30,7 +35,6 @@
 
 		location.href = url;
 	}
-	
 </script>
 
 </head>
@@ -39,7 +43,7 @@
 
 		<h2>상품 상세페이지</h2>
 		
-		<img src="/pstorage/${dto.filename }" class="img-thumbnail" width="236" height="306">
+		<img src="/contents/storage/${dto.filename }" class="img-thumbnail" width="236" height="306">
 		
 		<div class="panel panel-default">
 
@@ -58,13 +62,13 @@
 		</div>
 		<div>
 			<c:choose>
-    		<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A'}">
+    		<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A '}">
 			<button type="button" class="btn" onclick="location.href='/admin/create'">등록</button>
 			<button type="button" class="btn" onclick="updateM()">수정</button>
 			<button type="button" class="btn" onclick="deleteM()">삭제</button>
 			</c:when>
 			</c:choose>
-			<select name="amount" id="amount">
+			<select name="amount" id="amount" style="width:5%; height:30px;">
 		        <option value="1">1</option>
 		        <option value="2">2</option>
 		        <option value="3">3</option>

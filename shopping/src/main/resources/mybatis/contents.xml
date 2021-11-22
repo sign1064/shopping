@@ -6,56 +6,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.study.contents.ContentsMapper">
 
+	<select id="detail" parameterType="int"
+		resultType="com.study.contents.ContentsDTO">
+		select contentsno, cateno, pname, price, filename, stock,
+		detail
+		from contents
+		where contentsno = #{conentsno}
+	</select>
 
+	<select id="mainlist" parameterType="map"
+		resultType="com.study.contents.ContentsDTO">
+		select contentsno, cateno, pname, price, filename, stock, r
+		from (
+		select contentsno, cateno, pname, price, filename, stock, rownum r
+		from(
+		select contentsno, cateno,pname, price, filename, stock
+		from
+		contents
 
-	<select id="detail" parameterType="int" resultType="com.study.contents.ContentsDTO">
-        select contentsno, cateno, pname, price, filename, stock, detail
-        from contents
-        where contentsno = #{conentsno}
-    </select>
-	
-	
-	
-	<select id="mainlist" parameterType="map" resultType="com.study.contents.ContentsDTO">
-        select contentsno, cateno, pname, price, filename, stock,  r
-        from (
-            select contentsno, cateno, pname, price, filename, stock, rownum r
-            from(
-                select contentsno, cateno,pname, price, filename, stock
-                from contents
-                 
-                <where>
-                    <choose>
-                        <when test="col=='pname'">
-                            pname like '%'||#{word}||'%'
-                        </when>
-                    </choose>
-                     and cateno = #{cateno}
-                </where>
-                order by contentsno desc
-            )
+		<where>
+			<choose>
+				<when test="col=='pname'">
+					pname like '%'||#{word}||'%'
+				</when>
+			</choose>
+			and cateno = #{cateno}
+		</where>
+		order by contentsno desc
+		)
     	<![CDATA[   
         )where r >= #{sno} and r <= #{eno}
-    	]]> 
-    </select>
-    
-	
-	
+    	]]>
+	</select>
+
 	<select id="getCategory" resultType="Map">
-		select cateno, catename from category
+		select cateno, catename from
+		category
 		where categrpno is null
 	</select>
-	
-	
 
 	<update id="updateFile" parameterType="Map">
 		update contents
-		set filename = #{fname}
+		set
+		filename = #{fname}
 		where contentsno = #{contentsno}
 	</update>
 	
-	
-	
+	<delete id="delete">
+		delete contents
+		where contentsno = #{contentsno}
+	</delete>
+
 	<select id="total" parameterType="Map" resultType="int">
 		select count(*) from contents
 		<where>
@@ -73,15 +74,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
-
-
 	<select id="list" parameterType="Map"
 		resultType="com.study.contents.ContentsDTO">
 		select contentsno, cateno, pname, price, filename, stock, rdate, r
 		from (
-		select contentsno, cateno, pname, price, filename, stock,rdate, rownum r
+		select contentsno, cateno, pname, price, filename, stock,rdate,
+		rownum r
 		from(
-		select contentsno, cateno,pname, price, filename, stock,rdate
+		select contentsno, cateno,pname, price, filename,
+		stock,rdate
 		from contents
 		<where>
 			<choose>
@@ -103,8 +104,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ]]>
 	</select>
 
-
-
 	<update id="update"
 		parameterType="com.study.contents.ContentsDTO">
 		update contents
@@ -114,17 +113,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where contentsno =#{contentsno}
 	</update>
 
-
-
 	<insert id="create"
 		parameterType="com.study.contents.ContentsDTO">
-		insert into contents(contentsno, cateno, pname, price, filename, detail,
+		insert into contents(contentsno, cateno, pname, price,
+		filename, detail,
 		rdate, stock)
-		values((select nvl(max(contentsno),0)+1 from contents),
+		values((select nvl(max(contentsno),0)+1
+		from contents),
 		#{cateno},#{pname}, #{price}, #{filename}, #{detail},
 		sysdate, #{stock})
 	</insert>
-
-
 
 </mapper>

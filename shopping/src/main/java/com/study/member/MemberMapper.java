@@ -32,4 +32,8 @@ public interface MemberMapper {
 	int ototal(Map map);
 
 	List<OrdersDTO> olist(Map map);
+
+	int kakaoCreate(MemberDTO dto);
+
+	int googleCreate(MemberDTO dto);
 }
