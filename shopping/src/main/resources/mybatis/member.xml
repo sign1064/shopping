@@ -7,29 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.study.member.MemberMapper"> 
 
 	<select id="mypage" parameterType="String"
-		resultMap="memberOrder">
-		select m.id, m.mname, m.fname, m.postcode, m.address1, m.address2,
-		o.orderno,o.odate,o.pname,o.quantity,o.total
-		from member m left outer join orders o
-		on m.id = o.id
-		where m.id=#{id}
-	</select>
-
-	<select id="ototal" parameterType="Map" resultType="int">
-		select count(*) from member
-		<where>
-			<choose>
-				<when test="col=='mname'">
-					mname like '%'||#{word}||'%'
-				</when>
-				<when test="col=='id'">
-					id like '%'||#{word}||'%'
-				</when>
-				<when test="col=='email'">
-					email like '%'||#{word}||'%'
-				</when>
-			</choose>
-		</where>
+		resultType="com.study.member.MemberDTO">
+		select id, mname, tel, email, fname, postcode, address1, address2
+		from member
+		where id=#{id}
 	</select>
 
 	<select id="total" parameterType="Map" resultType="int">

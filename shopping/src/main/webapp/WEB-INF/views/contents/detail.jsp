@@ -21,11 +21,7 @@
 
 	function 
 	addCart() {
-		var contentsno = $
-		{
-			dto.contentsno
-		}
-		;
+		var contentsno = ${dto.contentsno};
 		var amount = document.getElementById("amount").value;
 
 		var url = "/cart/addCart?contentsno=";
@@ -65,7 +61,7 @@
     		<c:when test="${not empty sessionScope.id && sessionScope.grade == 'A '}">
 			<button type="button" class="btn" onclick="location.href='/admin/create'">등록</button>
 			<button type="button" class="btn" onclick="updateM()">수정</button>
-			<button type="button" class="btn" onclick="deleteM()">삭제</button>
+			<button type="button" class="btn" onclick="deleteM()">삭제</button><br/><br/>
 			</c:when>
 			</c:choose>
 			<select name="amount" id="amount" style="width:5%; height:30px;">
@@ -81,7 +77,7 @@
 		        <option value="10">10</option>       
 		     </select>
 			<button type="button" class="btn" onclick="addCart()">장바구니 담기</button>
-			<button type="button" class="btn" onclick="history.back()">목록</button>
+			<button type="button" class="btn" onclick="history.back()">목록</button><br/><br/>
 		</div>
 	</div>
 </body>

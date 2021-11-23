@@ -8,7 +8,7 @@ import com.study.orders.OrdersDTO;
 
 import lombok.Data;
 
-@Data // lombok을 사용하는 annotation
+@Data
 public class MemberDTO {
 	private String id;
 	private String password;
@@ -18,10 +18,7 @@ public class MemberDTO {
 	private String postcode;
 	private String address1;
 	private String address2;
-	private String job;
 	private String fname;
-	private MultipartFile fnameMF; // MultipartFile : 파일 업로드 형태
+	private MultipartFile fnameMF;
 	private String grade;
-
-	private List<OrdersDTO> list;
 }

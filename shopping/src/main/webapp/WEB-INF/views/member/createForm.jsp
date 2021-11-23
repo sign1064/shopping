@@ -136,11 +136,6 @@ function inCheck(f){
 		f.email.focus();
 		return false;
 	}
-	if(f.job.selectedIndex == 0){
-		alert("직업을 선택하세요");
-		f.job.focus();
-		return false;
-	}
 }
 
 </script>

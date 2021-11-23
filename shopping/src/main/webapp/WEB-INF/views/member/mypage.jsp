@@ -26,6 +26,8 @@
 				<div class="caption">
 					<li>ID:${dto.id}</li>
 					<li>성명:${dto.mname}</li>
+					<li>연락처:${dto.tel}</li>
+					<li>email:${dto.email}</li>
 					<li>배송지:(${dto.postcode })${dto.address1 } ${dto.address2}</li>
 				</div>
 			</div>
